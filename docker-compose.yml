@@ -33,6 +33,9 @@ services:
     tty: true
     privileged: true
     entrypoint: ["/bin/bash"]
+    ports:
+      - 2022:22
+      - 3232:4444
     networks: 
       vpn:
         ipv4_address: 172.168.40.3
