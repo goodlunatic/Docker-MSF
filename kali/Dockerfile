@@ -1,6 +1,6 @@
 FROM kalilinux/kali-rolling
 
-RUN sed -i 's/http.kali.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list \
+RUN sed -i 's/kali.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list \
     && sed -i 's/security.kali.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list \
     && apt-get update \
     && apt-get upgrade -y --no-install-recommends \
