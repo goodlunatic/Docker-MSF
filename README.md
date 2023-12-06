@@ -1,10 +1,11 @@
-# kali-docker
+# Docker-MSF
 
-> docker 一键部署 kali 渗透测试环境
+> 在Docker中精简地部署MSF渗透测试框架
 
 ------
 
 ## 简介
+本项目继承自：[kali-docker](https://github.com/EXP-Tools/kali-docker),作者在其基础上进行了适当的优化
 
 kali 是提供的官方镜像 [kali-rolling](https://hub.docker.com/r/kalilinux/kali-rolling) 是不含任何渗透工具的纯净版系统，一些常用的渗透工具（如 msf、hydra 等）需要额外安装。
 
@@ -21,9 +22,7 @@ kali-docker
 │   ├── Dockerfile ............. [docker 构建剧本]
 │   └── msfdb .................. [为兼容 docker 而修改过的 msf 数据库管理脚本]
 ├── pgdb ....................... [msf 数据库数据挂载目录，用于数据迁移]
-├── run.ps1 .................... [Windows: 一键部署并进入 kali 环境]
 ├── run.sh ..................... [Linux: 一键部署并进入 kali 环境]
-├── stop.ps1 ................... [Windows: 一键停止 kali 服务]
 └── stop.sh .................... [Linux: 一键停止 kali 服务]
 ```
 
@@ -49,10 +48,8 @@ kali-docker
 ## 部署指引
 
 - 宿主机安装 docker、docker-compose
-- 下载仓库： `git clone https://github.com/lyy289065406/kali-docker`
 - 构建镜像并运行：
     - Linux: `cd kali-docker && ./run.sh`
-    - Windows: `cd kali-docker && ./run.ps1`
 
 
 ## 默认工具清单
