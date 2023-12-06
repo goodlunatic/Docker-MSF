@@ -1,0 +1,51 @@
+# How to use :
+# docker-compose up -d
+# docker-compose down
+# --------------------------------------------------------------------------------
+
+version: '2'
+services:
+  pgdb:
+    image: postgres
+    hostname: PGDB
+    container_name: docker_pgdb
+    environment:
+      POSTGRES_DB: msf
+      POSTGRES_USER: msf
+      POSTGRES_PASSWORD: msf
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - ./pgdb/data/:/var/lib/postgresql/data/pgdata
+#   ports:
+#     - 5432:5432
+    networks: 
+      vpn:
+        ipv4_address: 172.168.40.2
+    restart: unless-stopped
+
+  kali:
+    hostname: KALI
+    container_name: docker_kali
+    build: 
+      context: ./kali
+      dockerfile: ./Dockerfile
+    stdin_open: true
+    tty: true
+    privileged: true
+    entrypoint: ["/bin/bash"]
+    networks: 
+      vpn:
+        ipv4_address: 172.168.40.3
+    depends_on: 
+      - pgdb
+    restart: unless-stopped
+
+
+networks:
+  vpn:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet:  172.168.40.0/24
+          gateway: 172.168.40.1
